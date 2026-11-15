@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Inter, JetBrains_Mono, Vazirmatn } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Chrome } from "@/components/Chrome";
 
-const serif = Newsreader({ subsets: ["latin"], variable: "--font-serif", display: "swap", style: ["normal", "italic"], weight: ["200", "300", "400", "500"] });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap", weight: ["500", "600"] });
-const fa = Vazirmatn({ subsets: ["arabic"], variable: "--font-fa", display: "swap", weight: ["400", "600"] });
-const sans = Inter({ subsets: ["latin", "latin-ext"], variable: "--font-sans", display: "swap" });
+// Self-hosted variable fonts: the build never depends on fetching fonts from Google.
+const serif = localFont({
+  src: [
+    { path: "../fonts/newsreader-latin-normal.woff2", weight: "200 500", style: "normal" },
+    { path: "../fonts/newsreader-latin-italic.woff2", weight: "200 500", style: "italic" },
+  ],
+  variable: "--font-serif", display: "swap", fallback: ["Georgia", "serif"],
+});
+const sans = localFont({ src: "../fonts/inter-latin-normal.woff2", weight: "100 900", variable: "--font-sans", display: "swap", fallback: ["system-ui", "sans-serif"] });
+const mono = localFont({ src: "../fonts/jetbrains-latin-normal.woff2", weight: "100 800", variable: "--font-mono", display: "swap", fallback: ["ui-monospace", "Menlo", "monospace"] });
+const fa = localFont({ src: "../fonts/vazirmatn-arabic-normal.woff2", weight: "100 900", variable: "--font-fa", display: "swap", fallback: ["Tahoma", "sans-serif"] });
 
 export const metadata: Metadata = {
   title: { default: "Gripp Arcade", template: "%s · Gripp Arcade" },
