@@ -88,6 +88,7 @@ export function GameShell({ game }: { game: GameMeta }) {
 
   return (
     <div>
+      <header className="pagehead" style={{ paddingTop: 8 }}><div><div className="label bronze">Game {String(game.n).padStart(2, "0")} · {game.category}</div><h1>{game.name.includes(" ") ? <>{game.name.slice(0, game.name.lastIndexOf(" ") + 1)}<i>{game.name.slice(game.name.lastIndexOf(" ") + 1)}</i></> : <i>{game.name}</i>}</h1></div><GameIcon id={game.id} size={64} /></header>
       <div className="row sp" style={{ marginBottom: 12 }}>
         <div className="label">Game {String(game.n).padStart(2, "0")} of 20 · {game.category} · {game.mode} · ~{game.minutes} min · Host {game.host}</div>
         <button className="chip" onClick={() => setHelp((h) => !h)} aria-expanded={help}>{help ? "Hide help" : "Help"}</button>
@@ -97,8 +98,7 @@ export function GameShell({ game }: { game: GameMeta }) {
       {phase === "intro" && (
         <div className="stage" style={{ display: "grid", placeItems: "center", textAlign: "center", padding: 32 }}>
           <div>
-            <div style={{ display: "grid", placeItems: "center", marginBottom: 8 }}><GameIcon id={game.id} size={72} /></div><h2 style={{ color: "#F4F1EC" }}>{game.name}</h2>
-            <p style={{ color: "#DFD8D0" }}>{game.tagline}</p>
+            <div style={{ display: "grid", placeItems: "center", marginBottom: 8 }}><GameIcon id={game.id} size={72} /></div><h2 className="disp3 onink">{game.tagline}</h2>
             {best !== undefined && <p className="mono" style={{ color: "#B9986A" }}>Your best: {best.toLocaleString()} {game.unit ?? ""}</p>}
             <div className="row" style={{ justifyContent: "center" }}>
               <button className="btn" onClick={() => start(true)} disabled={servoDone}>{tr("play", locale)}</button>

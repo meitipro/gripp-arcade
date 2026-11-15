@@ -1,4 +1,5 @@
 "use client";
+import { PageHead } from "@/components/PageHead";
 import { useMemo, useState } from "react";
 import { Avatar } from "@/components/Avatar";
 import { sampleMembers } from "@/lib/members";
@@ -17,7 +18,7 @@ export default function Page() {
   const visit = (h: string) => { setOpen(h); if (h !== me) update((x) => (x.visits.includes(h) ? x : { ...x, visits: [...x.visits, h] })); };
   return (
     <div className="wrap"><section className="block">
-      <h1>Wall of Amplifiers</h1>
+      <PageHead kicker="Community" title="Wall of Amplifiers" />
       <p className="muted">Every member is a face. Robot portraits by default, and photos only with an opt in. Open a mini card to visit it (the Wall tour quest counts these).</p>
       <div className="row sp"><span className="mono">{all.length} faces · {s.visits.length} visited</span>
         <label className="row"><input type="checkbox" checked={s.profile?.face === "photo"} onChange={(e) => update((x) => ({ ...x, profile: x.profile && { ...x.profile, face: e.target.checked ? "photo" : "robot" } }))} /> <span className="mono">Photo opt in (not available in demo; robot is used)</span></label></div>

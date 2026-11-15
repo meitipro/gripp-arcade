@@ -1,4 +1,5 @@
 "use client";
+import { PageHead } from "@/components/PageHead";
 import { useState } from "react";
 import { update, useStore } from "@/lib/store";
 import { syncToDiscord } from "@/lib/sync";
@@ -31,7 +32,7 @@ export default function Page() {
   };
   return (
     <div className="wrap"><section className="block" style={{ maxWidth: 760 }}>
-      <div className="row"><Character name="Dot" size={72} /><div><h1 style={{ margin: 0 }}>Discord bot</h1></div></div>
+      <PageHead kicker="Dot · herald" title="Discord bot" aside={<Character name="Dot" size={72} />} />
       <p className="muted">Add Dot to your server so members can look up each other&apos;s hub stats right in chat. The bot reads no messages, joins no voice channels and needs no permissions. It only answers slash commands.</p>
       <div className="row" style={{ margin: "16px 0" }}>
         {INVITE ? <a className="btn bronze" href={INVITE} target="_blank" rel="noopener noreferrer">Add the bot to Discord</a> : <span className="btn alt" aria-disabled>Invite link appears once the bot is configured</span>}

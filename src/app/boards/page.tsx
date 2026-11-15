@@ -1,4 +1,5 @@
 "use client";
+import { PageHead } from "@/components/PageHead";
 import { useEffect, useMemo, useState } from "react";
 import { GAMES } from "@/lib/catalog";
 import { sampleMembers } from "@/lib/members";
@@ -32,7 +33,7 @@ export default function Page() {
   const myRank = sorted.findIndex((r) => r.handle === me) + 1;
   return (
     <div className="wrap"><section className="block">
-      <h1>Boards</h1>
+      <PageHead kicker="Rankings" title="Boards" />
       <p className="muted">Sample community members fill the boards until the community arrives. {shared ? "Showing shared scores too." : "Your scores are local to this device unless the host enables shared boards."}</p>
       <label className="label" htmlFor="g">Board</label><br />
       <select id="g" value={game} onChange={(e) => setGame(e.target.value)} style={{ margin: "6px 0 16px" }}>

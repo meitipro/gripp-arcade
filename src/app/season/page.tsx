@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { PageHead } from "@/components/PageHead";
 import { Character, CAST } from "@/components/Cast";
 import { BOSS, SEASON, WEEKS, bossPhase, seasonWeek } from "@/lib/season";
 import { useStore } from "@/lib/store";
@@ -26,7 +27,7 @@ function SeasonInner() {
   const cap = Math.floor(BOSS.hp * BOSS.memberCapPct);
   return (
     <div className="wrap"><section className="block">
-      <h1>{intermission ? "Intermission" : `Week ${Math.min(8, Math.max(1, idx + 1))}: ${week.name}`}</h1>
+      <PageHead kicker={`Season ${SEASON.id} · ${SEASON.name}`} title={intermission ? "Intermission" : `Week ${Math.min(8, Math.max(1, idx + 1))}: ${week.name}`} />
       <p className="muted" style={{ maxWidth: "60ch" }}>{inSeason || intermission ? week.note : `Season ${SEASON.id} begins ${SEASON.start}. Warm up in practice mode.`} Host: {week.host}.</p>
 
       <h2 style={{ marginTop: 32 }}>The eight weeks</h2>

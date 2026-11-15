@@ -1,4 +1,5 @@
 "use client";
+import { PageHead } from "@/components/PageHead";
 import { useMemo } from "react";
 import { SQUADS } from "@/lib/catalog";
 import { sampleMembers } from "@/lib/members";
@@ -19,7 +20,7 @@ export default function Page() {
   const max = rows[0].war || 1;
   return (
     <div className="wrap"><section className="block">
-      <h1>Squads and the weekly war</h1>
+      <PageHead kicker="Region war" title="Squads and the weekly war" />
       <p className="muted">Twelve regional teams and language homes. A squad&apos;s weekly score is the sum of its top 20 percent of members, so small squads can win and one star cannot carry a team.</p>
       <p className="note">You are in squad <b>{mine}</b>. Your week: {myWeek} HP. You can switch once at the start of a season.</p>
       <div className="grid g2" style={{ marginTop: 16 }}>

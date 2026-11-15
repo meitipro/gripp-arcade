@@ -1,4 +1,5 @@
 "use client";
+import { PageHead } from "@/components/PageHead";
 import { useState } from "react";
 import { resetAll, update, useStore } from "@/lib/store";
 import { SQUADS } from "@/lib/catalog";
@@ -14,7 +15,7 @@ export default function Page() {
   const saveHandle = () => { const h = cleanHandle(handle); if (h.length < 2) return setMsg("2 to 24 letters, numbers, dot, dash or underscore"); set({ handle: h }); setMsg("Saved"); setHandle(""); };
   return (
     <div className="wrap"><section className="block" style={{ maxWidth: 640 }}>
-      <h1>Settings</h1>
+      <PageHead kicker="You" title="Settings" />
       <div className="panel grid">
         <div><label className="label" htmlFor="h">Handle</label><div className="row"><input id="h" type="text" placeholder={p.handle} value={handle} onChange={(e) => setHandle(e.target.value)} maxLength={24} /><button className="btn" onClick={saveHandle}>Save</button></div><p className="note" role="status">{msg || "Your public name. No email or real name is needed."}</p></div>
         <div><label className="label" htmlFor="l">Language</label><br /><select id="l" value={p.locale} onChange={(e) => set({ locale: e.target.value as "en" | "fa" })}><option value="en">English</option><option value="fa">فارسی (right to left)</option></select></div>

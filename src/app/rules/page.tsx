@@ -1,3 +1,4 @@
+import { PageHead } from "@/components/PageHead";
 import type { Metadata } from "next";
 import { CAPS, TIERS } from "@/lib/points";
 import { GAMES } from "@/lib/catalog";
@@ -6,7 +7,7 @@ export const metadata: Metadata = { title: "Rules" };
 export default function Page() {
   return (
     <div className="wrap"><section className="block">
-      <h1>Rules and open numbers</h1>
+      <PageHead kicker="Every number is public" title="Rules and open numbers" />
       <p className="muted" style={{ maxWidth: "62ch" }}>Nothing is hidden. All point values and caps live here, so surprises never make anyone suspicious.</p>
       <div className="panel" style={{ maxWidth: "72ch" }}><h2>Hub Points are not Prisma Points</h2>
         <p>Hub Points (HP) are this hub&apos;s own community game score. They are capped daily, never transferred or traded, and carry no value beyond status and cosmetics. The hub never reads, writes or promises anything about official PrismaX points. This is a community-built project, not an official PrismaX product.</p></div>

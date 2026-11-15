@@ -1,4 +1,5 @@
 "use client";
+import { PageHead } from "@/components/PageHead";
 import { useState } from "react";
 import { gameById } from "@/lib/catalog";
 import { releaseRun, reverseRun, update, useStore } from "@/lib/store";
@@ -11,7 +12,7 @@ export default function Page() {
   const log = (action: string) => setAudit((a) => [{ ts: Date.now(), action, reason: reason || "(no reason)" }, ...a]);
   return (
     <div className="wrap"><section className="block">
-      <h1>Staff console</h1>
+      <PageHead kicker="Moderation" title="Staff console" />
       <p className="note">Local demo of the moderation tools: hold, release and reverse runs with an audit entry, freeze the wall in one click, and a reports queue. Role based access arrives with the hosted database.</p>
       <div className="panel" style={{ marginTop: 16 }}>
         <div className="row sp"><h3 style={{ margin: 0 }}>Pixel Wall</h3>

@@ -1,4 +1,5 @@
 "use client";
+import { PageHead } from "@/components/PageHead";
 import { useState } from "react";
 import { CardView } from "@/components/CardView";
 import { cardSvg } from "@/lib/card";
@@ -27,7 +28,7 @@ export default function Page() {
   const pinned = s.profile?.pinned.length ? s.profile.pinned : s.badges.slice(0, 3);
   return (
     <div className="wrap"><section className="block">
-      <h1>Operator card</h1>
+      <PageHead kicker="Collect" title="Operator card" />
       <div className="grid g2" style={{ alignItems: "start" }}>
         <div><CardView data={data} width={360} />
           <div className="row" style={{ marginTop: 16 }}><button className="btn" onClick={download}>Save as image</button><button className="btn alt" onClick={copy}>Copy share link</button></div>

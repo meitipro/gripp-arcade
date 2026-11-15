@@ -1,4 +1,5 @@
 "use client";
+import { PageHead } from "@/components/PageHead";
 import { GAMES } from "@/lib/catalog";
 import { dayCounts, levelProgressOf, statsOf, streakOf, totalHp, totalXp, useStore } from "@/lib/store";
 import { nextTier, tierFor } from "@/lib/points";
@@ -18,7 +19,7 @@ function Heat({ counts }: { counts: Record<string, number> }) {
 
 export default function Page() {
   const mounted = useMounted();
-  if (!mounted) return <div className="wrap"><section className="block"><h1>My progress</h1></section></div>;
+  if (!mounted) return <div className="wrap"><section className="block"><PageHead kicker="Operator" title="My progress" /></section></div>;
   return <Inner />;
 }
 function Inner() {
@@ -27,7 +28,7 @@ function Inner() {
   const ranked = s.runs.filter((r) => r.ranked);
   return (
     <div className="wrap"><section className="block">
-      <h1>My progress</h1>
+      <PageHead kicker="Operator" title="My progress" />
       <div className="grid g4">
         <div className="panel"><div className="stat">{hp.toLocaleString()}</div><div className="label">Hub Points</div></div>
         <div className="panel"><div className="stat">{totalXp(s).toLocaleString()}</div><div className="label">XP · level {lp.level}</div></div>

@@ -1,4 +1,5 @@
 "use client";
+import { PageHead } from "@/components/PageHead";
 import { BADGES, QUESTS } from "@/lib/catalog";
 import { questStatus, useStore } from "@/lib/store";
 
@@ -6,7 +7,7 @@ export default function Page() {
   const s = useStore();
   return (
     <div className="wrap"><section className="block">
-      <h1>Quests and badges</h1>
+      <PageHead kicker="Collect" title="Quests and badges" />
       <p className="muted">Quests give gentle direction. Rewards are paid automatically after the run that completes them.</p>
       {(["Daily", "Weekly", "Season"] as const).map((c) => (
         <div key={c} style={{ margin: "24px 0" }}>
