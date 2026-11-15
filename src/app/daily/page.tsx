@@ -15,9 +15,8 @@ function DailyInner() {
   const five = dailyFive(); const done = dailyDone(s);
   return (
     <div className="wrap"><section className="block">
-      <div className="label">{utcDay()} · resets at 00:00 UTC</div>
       <h1>Daily Five</h1>
-      <p className="muted">Five games from the date seed. Finish 1 for +10 HP, 3 for +30 HP, all 5 for +100 HP. Everyone gets the same five.</p>
+      <p className="muted">{utcDay()} UTC, resets at midnight. Five games from the date seed. Finish 1 for +10 HP, 3 for +30 HP, all 5 for +100 HP. Everyone gets the same five.</p>
       <div className="bar" style={{ margin: "16px 0" }}><i style={{ width: `${(done.length / 5) * 100}%` }} /></div>
       <div className="grid g3">
         {five.map((id, i) => { const g = gameById(id)!; const ok = done.includes(id); return (

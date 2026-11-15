@@ -66,7 +66,7 @@ export default function RailDash({ seed, reducedMotion, onReady, onProgress, onF
         <rect x="0" y={GROUND} width={W} height="50" fill="#3a3a3a" />
         {s.obs.map((o, i) => o.kind === "gap" ? <rect key={i} x={o.x - 24} y={GROUND} width="48" height="50" fill="#151515" /> :
           o.kind === "hook" ? <g key={i}><line x1={o.x} y1="20" x2={o.x} y2={GROUND - 36} stroke="#B56654" strokeWidth="5" /><path d={`M${o.x - 12} ${GROUND - 36} Q${o.x} ${GROUND - 14} ${o.x + 12} ${GROUND - 36}`} stroke="#B56654" strokeWidth="5" fill="none" /></g> :
-          !o.done && <text key={i} x={o.x} y={GROUND - 54} fontSize="22" textAnchor="middle" fill="#B9986A">⚙</text>)}
+          !o.done && <g key={i} transform={`translate(${o.x} ${GROUND - 66})`}><circle r="11" fill="#B9986A" /><circle r="4" fill="#2a2a2a" /><path d="M-3 -13h6l-1 5h-4z M-3 13h6l-1-5h-4z M-13 -3v6l5-1v-4z M13 -3v6l-5-1v-4z" fill="#B9986A" /></g>)}
         <rect x={px - 12} y={py} width="24" height={s.duck ? 20 : 34} rx="5" fill={s.hurt > 0 ? "#d97a66" : "#F4F1EC"} />
         <circle cx={px + 5} cy={py + 8} r="3" fill="#202020" />
       </svg>

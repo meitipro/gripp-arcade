@@ -22,7 +22,7 @@ export default function Page() {
         <label className="row"><input type="checkbox" defaultChecked={typeof window !== "undefined" && localStorage.getItem("gripp-mute") === "1"} onChange={(e) => { try { localStorage.setItem("gripp-mute", e.target.checked ? "1" : "0"); } catch {} }} /> Mute game sounds</label>
         <label className="row"><input type="checkbox" checked={p.calm} onChange={(e) => set({ calm: e.target.checked })} /> Calm mode: no animation, slower games</label>
       </div>
-      <div className="panel" style={{ marginTop: 16 }}><h3>Your data</h3><p className="muted">Everything lives in this browser only: handle, runs, points and wall tiles. Nothing else is stored.</p>
+      <div className="panel" style={{ marginTop: 16 }}><h2 style={{ fontSize: "1.4rem" }}>Your data</h2><p className="muted">Everything lives in this browser only: handle, runs, points and wall tiles. Nothing else is stored.</p>
         <button className="btn alt" onClick={() => { if (confirm("Delete all your runs, points, card and wall tiles on this device?")) { resetAll(); location.href = "/"; } }}>Delete everything</button></div>
     </section></div>
   );

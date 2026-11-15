@@ -3,13 +3,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { mulberry32, shuffle } from "@/lib/rng";
 import { SAMPLE_HANDLES } from "@/lib/members";
 import { getState, update } from "@/lib/store";
+import { Character } from "@/components/Cast";
 import type { GameProps } from "./types";
 
 const SCENES = [
-  { alt: "A robot arm holds a single grape and hesitates over a bowl.", art: "🤖🍇" },
-  { alt: "Two small robots argue over the last battery.", art: "🤖🔋🤖" },
-  { alt: "A gripper shakes hands with a very surprised cat.", art: "🦾🐈" },
-];
+  { alt: "A robot arm holds a single grape and hesitates over a bowl.", art: ["Gripp"] },
+  { alt: "Two small robots argue over the last battery.", art: ["Moss", "Dot"] },
+  { alt: "A gripper shakes hands with a very surprised visitor.", art: ["Gripp", "Lumen"] },
+] as const;
 const SAMPLE_CAPS = ["It said gently. It did not move.", "Wide eyes, wider budget.", "Calibrating my expectations.", "Please insert coffee.", "I only dropped it twice.", "Latency is a state of mind.", "One does not simply home --all.", "Plot twist: the grape was the operator.", "Proof of concept, proof of grape."];
 const BAD = /\b(hate|kill|idiot|stupid)\b/i;
 export default function CaptionBench({ seed, onReady, onProgress, onFinish }: GameProps) {
@@ -35,7 +36,7 @@ export default function CaptionBench({ seed, onReady, onProgress, onFinish }: Ga
     <div style={{ maxWidth: 560, margin: "0 auto" }}>
       <div className="mono" style={{ color: "#B9986A" }}>THIS WEEK&apos;S IMAGE</div>
       <div style={{ background: "#151515", borderRadius: 12, padding: 16, textAlign: "center", margin: "8px 0" }}>
-        <div style={{ fontSize: "3rem" }} aria-hidden>{scene.art}</div><div className="muted" style={{ color: "#DFD8D0", fontSize: ".85rem" }}>{scene.alt}</div>
+        <div className="row" style={{ justifyContent: "center", gap: 24 }} aria-hidden>{scene.art.map((n) => <Character key={n} name={n} size={84} />)}</div><div className="muted" style={{ color: "#DFD8D0", fontSize: ".85rem" }}>{scene.alt}</div>
       </div>
       {!mine ? (
         <div className="row"><input type="text" maxLength={80} value={text} onChange={(e) => setText(e.target.value)} placeholder="Type your caption…" aria-label="Caption" style={{ flex: 1 }} /><button className="btn" onClick={submit}>Submit</button></div>

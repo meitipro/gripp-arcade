@@ -1,14 +1,14 @@
 "use client";
 import Link from "next/link";
-import { dailyDone, dailyFive, levelProgressOf, memberCard, streakOf, totalHp, useStore } from "@/lib/store";
+import { dailyDone, dailyFive, levelProgressOf, streakOf, totalHp, useStore } from "@/lib/store";
 import { gameById } from "@/lib/catalog";
-import { CardView } from "./CardView";
+import { GameIcon } from "./GameIcon";
 import { nextTier, tierFor } from "@/lib/points";
 import { useMounted } from "@/lib/useMounted";
 
 export function Home() {
   const mounted = useMounted();
-  if (!mounted) return <section className="block" style={{ minHeight: 240 }} />;
+  if (!mounted) return <section className="block" style={{ minHeight: 320 }} />;
   return <HomeInner />;
 }
 function HomeInner() {
@@ -17,31 +17,27 @@ function HomeInner() {
   const five = dailyFive(); const done = dailyDone(s);
   const lp = levelProgressOf(s);
   const nt = nextTier(hp);
+  const st = streakOf(s);
   return (
-    <section className="block" style={{ paddingTop: 8 }}>
-      <div className="grid g2">
-        <div className="panel">
-          <div className="label">Daily Five · {done.length} of 5 done</div>
-          <h3 style={{ marginTop: 6 }}>Five games, five minutes each</h3>
-          <div className="bar" style={{ margin: "8px 0 14px" }}><i style={{ width: `${(done.length / 5) * 100}%` }} /></div>
-          <div className="row">
-            {five.map((id) => { const g = gameById(id)!; const ok = done.includes(id); return <Link key={id} href={`/games/${id}`} className={"chip" + (ok ? " on" : "")}>{ok ? "✓ " : ""}{g.name}</Link>; })}
-          </div>
-          <p className="note">1 game +10 HP · 3 games +30 HP · all 5 +100 HP. Hub Points are a community game score, not an official PrismaX reward.</p>
-        </div>
-        <div className="panel">
-          <div className="label">You · @{s.profile?.handle ?? "…"}</div>
-          <div className="row" style={{ alignItems: "flex-end", gap: 24 }}>
-            <div><div className="stat">{hp.toLocaleString()}</div><div className="label">Hub Points</div></div>
-            <div><div className="stat">{lp.level}</div><div className="label">Level</div></div>
-            <div><div className="stat">{streakOf(s)}</div><div className="label">Day streak</div></div>
-          </div>
-          <div className="bar" style={{ margin: "14px 0 6px" }}><i style={{ width: `${lp.pct * 100}%` }} /></div>
-          <div className="mono">Tier {tierFor(hp).roman} {tierFor(hp).name}{nt ? ` · ${(nt.from - hp).toLocaleString()} HP to ${nt.name}` : ""}</div>
-          <div className="row" style={{ marginTop: 12 }}><Link className="btn alt" href="/card">View my card</Link></div>
-        </div>
+    <section className="block today">
+      <div>
+        <h2>Today&apos;s Daily Five</h2>
+        <p className="muted">{done.length === 5 ? "All five done. Come back tomorrow." : `${done.length} of 5 done. One game earns 10 HP, three earn 30, all five earn 100.`}</p>
+        <ol className="five">
+          {five.map((id, i) => { const g = gameById(id)!; const ok = done.includes(id); return (
+            <li key={id}><Link href={`/games/${id}`} className={"fiverow" + (ok ? " done" : "")}>
+              <span className="fivenum">{i + 1}</span><GameIcon id={id} size={40} /><span className="idxmain"><b>{g.name}</b><span className="idxtag">{g.tagline}</span></span>
+              <span className="fivestate">{ok ? "Done" : `${g.minutes} min`}</span></Link></li>); })}
+        </ol>
       </div>
-      {s.profile && <div style={{ marginTop: 24, display: "none" }}><CardView data={memberCard(s)} /></div>}
+      <aside className="you">
+        <p className="yousentence">
+          @{s.profile?.handle}, you are <b>{tierFor(hp).name}</b> at level <b>{lp.level}</b> with <b>{hp.toLocaleString()}</b> Hub Points{st > 0 ? <> and a <b>{st}-day</b> streak</> : null}.
+        </p>
+        <div className="bar" aria-label={`Level progress ${Math.round(lp.pct * 100)} percent`}><i style={{ width: `${lp.pct * 100}%` }} /></div>
+        <p className="muted" style={{ marginTop: 8 }}>{nt ? `${(nt.from - hp).toLocaleString()} HP to ${nt.name}.` : "Top of the ladder."}</p>
+        <Link className="btn alt" href="/card">See my card</Link>
+      </aside>
     </section>
   );
 }

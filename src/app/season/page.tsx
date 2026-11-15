@@ -26,7 +26,6 @@ function SeasonInner() {
   const cap = Math.floor(BOSS.hp * BOSS.memberCapPct);
   return (
     <div className="wrap"><section className="block">
-      <div className="label">Season {SEASON.id} · {SEASON.name}</div>
       <h1>{intermission ? "Intermission" : `Week ${Math.min(8, Math.max(1, idx + 1))}: ${week.name}`}</h1>
       <p className="muted" style={{ maxWidth: "60ch" }}>{inSeason || intermission ? week.note : `Season ${SEASON.id} begins ${SEASON.start}. Warm up in practice mode.`} Host: {week.host}.</p>
 

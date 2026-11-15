@@ -19,7 +19,7 @@ export default function Page() {
           </div>
         </div>))}
       <h2>Badges</h2>
-      <div className="grid g4">{BADGES.map((b) => { const has = s.badges.includes(b.id); return <div key={b.id} className="panel" style={{ opacity: has ? 1 : 0.45 }}><b>{b.name}</b><div className="muted" style={{ fontSize: ".85rem" }}>{b.desc}</div><div className="mono">{has ? "Earned" : "Locked"}</div></div>; })}</div>
+      <div className="grid g4">{BADGES.map((b) => { const has = s.badges.includes(b.id); return <div key={b.id} className="panel" style={{ opacity: has ? 1 : 0.75 }}><b>{b.name}</b><div className="muted" style={{ fontSize: ".85rem" }}>{b.desc}</div><div className="mono">{has ? "Earned" : "Locked"}</div></div>; })}</div>
       <p className="note">Hub Points are a community game score, not an official PrismaX reward.</p>
     </section></div>
   );

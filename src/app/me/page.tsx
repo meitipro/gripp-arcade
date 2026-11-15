@@ -27,7 +27,6 @@ function Inner() {
   const ranked = s.runs.filter((r) => r.ranked);
   return (
     <div className="wrap"><section className="block">
-      <div className="label">@{s.profile?.handle}</div>
       <h1>My progress</h1>
       <div className="grid g4">
         <div className="panel"><div className="stat">{hp.toLocaleString()}</div><div className="label">Hub Points</div></div>

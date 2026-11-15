@@ -35,7 +35,7 @@ export default function Page() {
         </div>
         <div className="grid">
           <div className="panel"><div className="label">Tier ladder</div>
-            {TIERS.map((t) => <div key={t.n} className="row sp" style={{ padding: "6px 0", borderBottom: "1px solid var(--cream)", opacity: tierFor(hp).n >= t.n ? 1 : 0.5 }}><span>{t.roman} · {t.name}</span><span className="mono">{t.from === Infinity ? "Invite only" : `${t.from.toLocaleString()} HP`}</span></div>)}
+            {TIERS.map((t) => <div key={t.n} className="row sp" style={{ padding: "6px 0", borderBottom: "1px solid var(--cream)", opacity: tierFor(hp).n >= t.n ? 1 : 0.7 }}><span>{t.roman} · {t.name}</span><span className="mono">{t.from === Infinity ? "Invite only" : `${t.from.toLocaleString()} HP`}</span></div>)}
             <p className="note">Tiers are earned by lifetime Hub Points and never lost. Engineer and above flip to the dark card.</p></div>
           <div className="panel"><div className="label">Badges · pin up to three</div>
             <div className="row" style={{ marginTop: 8 }}>{BADGES.map((b) => { const has = s.badges.includes(b.id); return <button key={b.id} className={"chip" + (pinned.includes(b.id) ? " on" : "")} disabled={!has} onClick={() => togglePin(b.id)} title={b.desc}>{b.name}</button>; })}</div>

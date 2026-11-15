@@ -21,10 +21,10 @@ export default function Page() {
       <p className="muted">Every member is a face. Robot portraits by default, and photos only with an opt in. Open a mini card to visit it (the Wall tour quest counts these).</p>
       <div className="row sp"><span className="mono">{all.length} faces · {s.visits.length} visited</span>
         <label className="row"><input type="checkbox" checked={s.profile?.face === "photo"} onChange={(e) => update((x) => ({ ...x, profile: x.profile && { ...x.profile, face: e.target.checked ? "photo" : "robot" } }))} /> <span className="mono">Photo opt in (not available in demo; robot is used)</span></label></div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(64px,1fr))", gap: 10, margin: "16px 0" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(84px,1fr))", gap: 10, margin: "16px 0" }}>
         {shown.map((m) => (
-          <button key={m.handle} onClick={() => visit(m.handle)} aria-label={`Open card for ${m.handle}`} style={{ border: m.handle === me ? "2px solid var(--bronze)" : "1px solid var(--cream)", borderRadius: 14, background: "#fbf9f6", padding: 6, cursor: "pointer", display: "grid", justifyItems: "center", gap: 4 }}>
-            <Avatar handle={m.handle} size={48} /><span className="mono" style={{ fontSize: ".55rem", maxWidth: 60, overflow: "hidden", textOverflow: "ellipsis" }}>{m.handle}</span></button>))}
+          <button key={m.handle} onClick={() => visit(m.handle)} aria-label={`Open card for ${m.handle}`} style={{ border: m.handle === me ? "2px solid var(--bronze)" : "1px solid var(--cream)", borderRadius: 14, background: "var(--panel)", padding: 6, cursor: "pointer", display: "grid", justifyItems: "center", gap: 4 }}>
+            <Avatar handle={m.handle} size={56} /><span className="mono" style={{ fontSize: ".72rem", maxWidth: 80, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.handle}</span></button>))}
       </div>
       {shown.length < all.length && <button className="btn alt" onClick={() => setPage(page + 1)}>Load more</button>}
       {sel && (
