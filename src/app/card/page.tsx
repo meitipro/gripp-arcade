@@ -21,7 +21,7 @@ export default function Page() {
     };
     img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
   };
-  const link = typeof window !== "undefined" ? `${location.origin}/api/card/image?h=${data.handle}&hp=${hp}&sq=${data.squad}&no=${data.serial}&p=${data.stats.Precision}&s=${data.stats.Speed}&b=${data.stats.Brain}&c=${data.stats.Community}` : "";
+  const link = typeof window !== "undefined" ? `${location.origin}/api/card/png?h=${data.handle}&hp=${hp}&sq=${data.squad}&no=${data.serial}&p=${data.stats.Precision}&s=${data.stats.Speed}&b=${data.stats.Brain}&c=${data.stats.Community}` : "";
   const copy = async () => { try { await navigator.clipboard.writeText(link); update((x) => ({ ...x, shared: x.shared + 1 })); setMsg("Share link copied."); } catch { setMsg(link); } };
   const togglePin = (id: string) => update((x) => { const p = x.profile!; const cur = p.pinned.length ? p.pinned : x.badges.slice(0, 3); const next = cur.includes(id) ? cur.filter((b) => b !== id) : [...cur, id].slice(-3); return { ...x, profile: { ...p, pinned: next } }; });
   const pinned = s.profile?.pinned.length ? s.profile.pinned : s.badges.slice(0, 3);

@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     const topGames = Object.entries(m.bests).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([id, v]) => `${GAMES.find((g) => g.id === id)?.name ?? id}: ${v.toLocaleString()}`).join("\n") || "No bests yet";
     return reply({ embeds: [{
       title: `@${m.handle} · Tier ${m.tier}`, color: COLOR, url: site() ? `${site()}/card/${m.handle}` : undefined,
-      thumbnail: site() ? { url: `${site()}/api/card/image?h=${m.handle}&hp=${m.hp}&sq=${m.squad}` } : undefined,
+      thumbnail: site() ? { url: `${site()}/api/card/png?h=${m.handle}&hp=${m.hp}&sq=${m.squad}` } : undefined,
       fields: [
         { name: "Hub Points", value: m.hp.toLocaleString(), inline: true }, { name: "Level", value: String(m.level), inline: true }, { name: "Squad", value: m.squad, inline: true },
         { name: "Ranked runs", value: m.runs.toLocaleString(), inline: true }, { name: "Streak", value: `${m.streak} days`, inline: true }, { name: "Games played", value: `${m.gamesPlayed}/20`, inline: true },

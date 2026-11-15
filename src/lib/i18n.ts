@@ -7,6 +7,12 @@ const D: Record<string, { en: string; fa: string }> = {
   tagline: { en: "Twenty games, one operator card, a cast of small robots.", fa: "بیست بازی، یک کارت اپراتور و گروهی ربات کوچک." },
   hpnote: { en: "Hub Points are a community game score, not an official PrismaX reward.", fa: "امتیاز هاب یک امتیاز بازی جامعه است، نه پاداش رسمی PrismaX." },
   unofficial: { en: "Community-built. Not an official PrismaX product.", fa: "ساخته‌شده توسط جامعه. محصول رسمی PrismaX نیست." },
+  hero1: { en: "The game hub for PrismaX.", fa: "هاب بازی برای PrismaX." },
+  hero2: { en: "Twenty small games, one operator card, a cast of small robots and a community wall. Quick sessions, honest rules, no wallet, no money.", fa: "بیست بازی کوچک، یک کارت اپراتور، گروهی ربات و دیوار جامعه. جلسه‌های کوتاه، قوانین شفاف، بدون کیف پول و بدون پول." },
+  playDaily: { en: "Play today's Daily Five", fa: "پنج‌تایی امروز را بازی کن" }, allGames: { en: "Browse all 20 games", fa: "هر ۲۰ بازی" },
+  search: { en: "Search games", fa: "جستجوی بازی" }, results: { en: "Result", fa: "نتیجه" }, total: { en: "Total", fa: "مجموع" },
+  copy: { en: "Copy result", fa: "کپی نتیجه" }, quit: { en: "Quit run", fa: "خروج" }, help: { en: "Help", fa: "راهنما" },
+  mycard: { en: "My card", fa: "کارت من" }, welcome: { en: "Welcome, operator", fa: "خوش آمدی، اپراتور" },
   pause: { en: "Pause", fa: "توقف" }, resume: { en: "Resume", fa: "ادامه" }, again: { en: "Play again", fa: "بازی دوباره" },
 };
 export const tr = (k: string, l: Locale) => D[k]?.[l] ?? D[k]?.en ?? k;

@@ -8,7 +8,14 @@ import { bandIndex } from "@/lib/points";
 import { utcDay } from "@/lib/rng";
 import { tr } from "@/lib/i18n";
 import { syncToDiscord } from "@/lib/sync";
+import dynamic from "next/dynamic";
+const GameIcon = dynamic(() => import("./GameIcon").then((m) => m.GameIcon), { ssr: false, loading: () => <div style={{ width: 72, height: 72 }} /> });
 
+function CountUp({ to }: { to: number }) {
+  const [v, setV] = useState(0);
+  useEffect(() => { let raf = 0; const t0 = performance.now(); const f = (t: number) => { const k = Math.min(1, (t - t0) / 900); setV(Math.round(to * (1 - Math.pow(1 - k, 3)))); if (k < 1) raf = requestAnimationFrame(f); }; raf = requestAnimationFrame(f); return () => cancelAnimationFrame(raf); }, [to]);
+  return <>{v.toLocaleString()}</>;
+}
 type Phase = "intro" | "loading" | "play" | "result";
 interface Run { seed: number; token?: string; ranked: boolean }
 
@@ -90,7 +97,7 @@ export function GameShell({ game }: { game: GameMeta }) {
       {phase === "intro" && (
         <div className="stage" style={{ display: "grid", placeItems: "center", textAlign: "center", padding: 32 }}>
           <div>
-            <h2 style={{ color: "#F4F1EC" }}>{game.name}</h2>
+            <div style={{ display: "grid", placeItems: "center", marginBottom: 8 }}><GameIcon id={game.id} size={72} /></div><h2 style={{ color: "#F4F1EC" }}>{game.name}</h2>
             <p style={{ color: "#DFD8D0" }}>{game.tagline}</p>
             {best !== undefined && <p className="mono" style={{ color: "#B9986A" }}>Your best: {best.toLocaleString()} {game.unit ?? ""}</p>}
             <div className="row" style={{ justifyContent: "center" }}>
@@ -115,7 +122,7 @@ export function GameShell({ game }: { game: GameMeta }) {
       {phase === "result" && result && (
         <div className="stage" style={{ padding: 24 }}>
           <div className="label" style={{ color: "#B9986A" }}>Result</div>
-          <div className="stat" style={{ fontSize: "3.4rem" }}>{result.score.toLocaleString()} <span style={{ fontSize: "1rem" }}>{game.unit ?? "score"}</span></div>
+          <div className="stat" style={{ fontSize: "3.4rem" }}><CountUp to={result.score} /> <span style={{ fontSize: "1rem" }}>{game.unit ?? "score"}</span></div>
           <div className="mono" style={{ color: "#B9986A" }}>Band {bi + 1} of 5{best !== undefined && result.score >= best ? " · New best" : ""}</div>
           {result.award && result.award.parts.length > 0 && (
             <div style={{ margin: "16px 0" }}>

@@ -8,7 +8,7 @@ import { dailyFive } from "./daily";
 
 export interface Profile {
   handle: string; face: "robot" | "photo"; squad: string; locale: "en" | "fa";
-  calm: boolean; joined: string; serial: number; pinned: string[]; discordToken?: string;
+  calm: boolean; joined: string; serial: number; pinned: string[]; discordToken?: string; onboarded?: boolean;
 }
 export interface LedgerRow { id: string; kind: string; amount: number; xp: number; ref: string; day: string; ts: number }
 export interface Run { id: string; game: string; score: number; hp: number; ranked: boolean; status: "counted" | "held" | "reversed"; day: string; ts: number }

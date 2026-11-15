@@ -6,6 +6,8 @@ import { Gripp } from "./Logo";
 import { update, useStore } from "@/lib/store";
 import { tr } from "@/lib/i18n";
 import { hashString } from "@/lib/rng";
+import dynamic from "next/dynamic";
+const Onboarding = dynamic(() => import("./Onboarding"), { ssr: false });
 
 const LINKS: [string, string][] = [["/games", "games"], ["/season", "season"], ["/daily", "daily"], ["/card", "card"], ["/me", "me"], ["/boards", "boards"], ["/wall", "wall"], ["/squads", "squads"], ["/quests", "quests"], ["/discord", "discord"], ["/rules", "rules"], ["/settings", "settings"]];
 
@@ -29,18 +31,23 @@ export function Chrome({ children }: { children: React.ReactNode }) {
     document.documentElement.dir = locale === "fa" ? "rtl" : "ltr";
     document.documentElement.classList.toggle("calm", !!s.profile?.calm);
   }, [locale, s.profile?.calm]);
+  const [theme, setTheme] = useState<string>("");
+  useEffect(() => { try { setTheme(localStorage.getItem("gripp-theme") || ""); } catch {} }, []);
+  const toggleTheme = () => { const dark = document.documentElement.dataset.theme === "dark" || (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches); const next = dark ? "light" : "dark"; document.documentElement.dataset.theme = next; try { localStorage.setItem("gripp-theme", next); } catch {} setTheme(next); };
   return (
     <>
       <a href="#main" style={{ position: "absolute", left: -999 }} onFocus={(e) => (e.currentTarget.style.left = "8px")}>Skip to content</a>
       <nav className="nav" aria-label="Main">
         <div className="wrap">
           <Link href="/" className="brand"><Gripp /> Gripp Arcade</Link>
+          <button className="themebtn" onClick={toggleTheme} aria-label={`Switch theme (current: ${theme || "auto"})`} title="Light / dark">◐</button>
           {LINKS.map(([href, k]) => (
             <Link key={href} href={href} className={path === href || path.startsWith(href + "/") ? "on" : ""}>{tr(k, locale)}</Link>
           ))}
         </div>
       </nav>
       <div className="toastwrap" role="status" aria-live="polite">{toasts.map((t) => <div key={t.id} className="toastitem">{t.m}</div>)}</div>
+      {s.profile && !s.profile.onboarded && s.ledger.length === 0 && <Onboarding />}
       <main id="main">{children}</main>
       <footer>
         <div className="wrap">

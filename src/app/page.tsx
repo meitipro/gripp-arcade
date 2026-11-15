@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Catalog } from "@/components/Catalog";
 import { Home } from "@/components/HomeClient";
 import { Character, CAST } from "@/components/Cast";
+import { T } from "@/components/T";
 
 export default function Page() {
   return (
@@ -10,11 +11,11 @@ export default function Page() {
         <div className="heroGrid">
           <div>
             <div className="label">Season 0 · Calibration · a community proposal</div>
-            <h1>The game hub for PrismaX.</h1>
-            <p className="lead">Twenty small games, one operator card, a cast of small robots and a community wall. Quick sessions, honest rules, no wallet, no money.</p>
+            <h1><T k="hero1" /></h1>
+            <p className="lead"><T k="hero2" /></p>
             <div className="row">
-              <Link className="btn bronze" href="/daily">Play today&apos;s Daily Five</Link>
-              <Link className="btn alt" href="/games">Browse all 20 games</Link>
+              <Link className="btn bronze" href="/daily"><T k="playDaily" /></Link>
+              <Link className="btn alt" href="/games"><T k="allGames" /></Link>
             </div>
           </div>
           <div style={{ display: "grid", placeItems: "center" }} className="floaty" aria-hidden="true"><Character name="Gripp" size={220} /></div>

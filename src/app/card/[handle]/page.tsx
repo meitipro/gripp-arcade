@@ -9,7 +9,8 @@ import { hashString, mulberry32 } from "@/lib/rng";
 export const dynamicParams = false;
 export function generateStaticParams() { return SAMPLE_HANDLES.map((handle) => ({ handle })); }
 export async function generateMetadata({ params }: { params: Promise<{ handle: string }> }): Promise<Metadata> {
-  const { handle } = await params; return { title: `@${decodeURIComponent(handle)}`, description: "A sample operator card from Gripp Arcade." };
+  const { handle } = await params; const h = decodeURIComponent(handle); const m = sampleMembers().find((x) => x.handle === h);
+  return { title: `@${h}`, description: "A sample operator card from Gripp Arcade.", openGraph: { images: [`/api/card/png?h=${h}&hp=${m?.hp ?? 0}&sq=${m?.squad ?? "GL"}&no=${m?.serial ?? 1}`] } };
 }
 export default async function Page({ params }: { params: Promise<{ handle: string }> }) {
   const handle = decodeURIComponent((await params).handle);

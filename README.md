@@ -33,3 +33,7 @@ This first release is **local-first**: your profile, ledger, bests and wall tile
 ## Discord bot
 
 Slash-command bot served by this app at /api/discord/interactions (Ed25519 verified, no SDK, no message access). Commands: /stats [member], /leaderboard, /daily, /link, /about. Members link with a 6 digit code from /link on the /discord page; after that each run syncs a clamped summary (points, level, tier, runs, streak, badges, bests, wall tiles, boss damage). Needs Upstash Redis. Setup steps are on the /discord page; register commands once with scripts/register-commands.mjs.
+
+## Final polish (v1.0)
+
+Drawn icon per game, light/dark theme toggle, first-run onboarding, PNG share cards (/api/card/png, used by the Discord embed), custom 404 and error pages, search in the catalog, more Persian strings, sitemap and robots, and a midnight cron (vercel.json) where Dot posts the Daily Five to a Discord webhook when DISCORD_WEBHOOK_URL is set.
