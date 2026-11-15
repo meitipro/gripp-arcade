@@ -342,3 +342,22 @@ footer .flinks a:hover { color: var(--bronze); }
 .stage .label.gold { color: #B9986A; } .stage .label.dim { color: rgba(244,241,236,.65); }
 .stage .paperbtn { background: #F4F1EC; color: #202020; border-color: #F4F1EC; }
 .stage .btn.alt:hover { opacity: .8; }
+
+/* ===== canvas parity: wall, squads, season ===== */
+.sqrow { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 10px; border: 0; border-bottom: 1px solid var(--line); cursor: pointer; min-height: 52px; color: var(--ink); font-family: inherit; transition: background .12s; } .sqrow:hover { background: color-mix(in srgb, var(--cream) 70%, transparent) !important; }
+.squadbanner { background: #202020; color: #F4F1EC; border-radius: 20px; padding: 28px 32px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; position: relative; overflow: hidden; }
+.facegrid2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); border-top: 1px solid var(--ink); margin-top: 28px; border-inline-start: 1px solid var(--line); }
+.facegrid2 .fc { border: 0; border-inline-end: 1px solid var(--line); border-bottom: 1px solid var(--line); background: transparent; padding: 14px 8px 10px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; cursor: pointer; color: inherit; transition: transform .22s var(--ease); } .facegrid2 .fc:hover { transform: translateY(-4px) rotate(-2deg); }
+body[data-dark] { --ink: #F4F1EC; --paper: #161615; --cream: #38332e; --panel: #232220; --brown: #b3a48e; --soft: #cdbfa9; --bronze: #d17f6b; --gold: #c9a978; --line: rgba(244,241,236,.18); background: #161615; color: #F4F1EC; }
+body[data-dark] .btn { color: #161615; } body[data-dark] .btn.alt { color: #F4F1EC; } body[data-dark] .nav { background: #161615; border-color: rgba(244,241,236,.18); }
+.seasonstats { display: flex; border: 1px solid rgba(244,241,236,.3); border-radius: 16px; overflow: hidden; } .seasonstats > div { padding: 14px 22px; } .seasonstats > div + div { border-inline-start: 1px solid rgba(244,241,236,.2); } .seasonstats .serif { font: 200 36px/1.1 var(--serif); letter-spacing: -.03em; }
+.label.gold { color: var(--gold); }
+@keyframes glitch2 { 0%, 86%, 100% { transform: translate(0); clip-path: inset(0); } 88% { transform: translate(-8px, 2px); clip-path: inset(18% 0 52% 0); } 91% { transform: translate(10px, -2px); clip-path: inset(58% 0 8% 0); } 94% { transform: translate(-4px, 0); clip-path: inset(38% 0 30% 0); } }
+@keyframes shake { 0%, 100% { transform: translate(0); } 20% { transform: translate(-10px, 3px); } 40% { transform: translate(9px, -4px); } 60% { transform: translate(-6px, 2px); } 80% { transform: translate(5px, 0); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.gl { animation: glitch2 3.2s steps(1) infinite; } .hit { animation: shake .32s linear; } .fl { animation: float 5s ease-in-out infinite; }
+.phases4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid rgba(244,241,236,.3); } .weeks8 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.wk { border: 1px solid; border-radius: 16px; padding: 18px; transition: border-color .22s; } .wk:hover { border-color: #B9986A !important; }
+@media (max-width: 900px) { .phases4, .weeks8 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .phases4, .weeks8 { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .gl, .hit, .fl { animation: none; } }
