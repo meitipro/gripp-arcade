@@ -39,7 +39,7 @@ export function Chrome({ children }: { children: React.ReactNode }) {
       <a href="#main" style={{ position: "absolute", left: -999 }} onFocus={(e) => (e.currentTarget.style.left = "8px")}>Skip to content</a>
       <nav className="nav" aria-label="Main">
         <div className="wrap">
-          <Link href="/" className="brand"><Gripp /> Gripp Arcade</Link>
+          <Link href="/" className="brand"><Gripp /> <span>Gripp <i>Arcade</i></span></Link>
           <button className="themebtn" onClick={toggleTheme} aria-label={`Switch theme (current: ${theme || "auto"})`} title="Light / dark"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" strokeWidth="1.6" /><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor" /></svg></button>
           {LINKS.map(([href, k]) => (
             <Link key={href} href={href} className={path === href || path.startsWith(href + "/") ? "on" : ""}>{tr(k, locale)}</Link>

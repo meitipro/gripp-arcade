@@ -5,7 +5,7 @@ import { CATEGORIES, GAMES } from "@/lib/catalog";
 import { useStore } from "@/lib/store";
 import { GameIcon } from "./GameIcon";
 
-/** The library as an index, not a wall of identical cards: one row per game, scanned like a table of instruments. */
+/** The library as a tile grid: icon, name, one line, and a Play pill. */
 export function Catalog({ limit }: { limit?: number }) {
   const s = useStore();
   const [cat, setCat] = useState<string>("All");
@@ -20,20 +20,20 @@ export function Catalog({ limit }: { limit?: number }) {
         </div>
       )}
       {!list.length && <p className="muted">No game matches that.</p>}
-      <ul className="index">
+      <div className="tiles">
         {list.map((g) => {
           const best = s.bests[g.id];
           return (
-            <li key={g.id}>
-              <Link href={`/games/${g.id}`} className="idxrow">
-                <GameIcon id={g.id} size={56} />
-                <span className="idxmain"><b className="idxname">{g.name}</b><span className="idxtag">{g.tagline}</span></span>
-                <span className="idxmeta"><span>{g.category} · {g.minutes} min</span><span className="num">{best !== undefined ? `Best ${best.toLocaleString()}` : g.host}</span></span>
-              </Link>
-            </li>
+            <Link key={g.id} href={`/games/${g.id}`} className="tilecard">
+              <div className="between"><span className="label bronze">No. {String(g.n).padStart(2, "0")}</span>{g.daily && <span className="label muted" style={{ fontSize: 11 }}>Daily</span>}</div>
+              <div className="ticon"><GameIcon id={g.id} size={84} /></div>
+              <div className="name">{g.name}</div>
+              <p className="tag">{g.tagline}</p>
+              <div className="foot"><span className="label muted" style={{ fontSize: 11 }}>{g.category} · {g.mode} · {g.minutes} min{best !== undefined ? ` · Best ${best.toLocaleString()}` : ""}</span><span className="label gopill">Play</span></div>
+            </Link>
           );
         })}
-      </ul>
+      </div>
     </>
   );
 }

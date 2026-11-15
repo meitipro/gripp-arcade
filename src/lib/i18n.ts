@@ -7,6 +7,7 @@ const D: Record<string, { en: string; fa: string }> = {
   tagline: { en: "Twenty games, one operator card, a cast of small robots.", fa: "بیست بازی، یک کارت اپراتور و گروهی ربات کوچک." },
   hpnote: { en: "Hub Points are a community game score, not an official PrismaX reward.", fa: "امتیاز هاب یک امتیاز بازی جامعه است، نه پاداش رسمی PrismaX." },
   unofficial: { en: "Community-built. Not an official PrismaX product.", fa: "ساخته‌شده توسط جامعه. محصول رسمی PrismaX نیست." },
+  heroTitle: { en: "Play like an operator", fa: "مثل یه اپراتور بازی کن" }, heroKicker: { en: "The game hub for PrismaX", fa: "هاب بازی PrismaX" },
   hero1: { en: "The game hub for PrismaX.", fa: "هاب بازی برای PrismaX." },
   hero2: { en: "Twenty small games, one operator card, a cast of small robots and a community wall. Quick sessions, honest rules, no wallet, no money.", fa: "بیست بازی کوچک، یک کارت اپراتور، گروهی ربات و دیوار جامعه. جلسه‌های کوتاه، قوانین شفاف، بدون کیف پول و بدون پول." },
   playDaily: { en: "Play today's Daily Five", fa: "پنج‌تایی امروز را بازی کن" }, allGames: { en: "Browse all 20 games", fa: "هر ۲۰ بازی" },
