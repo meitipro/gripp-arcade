@@ -374,3 +374,16 @@ body[data-dark] .btn { color: #161615; } body[data-dark] .btn.alt { color: #F4F1
 .tierbtn[aria-pressed="true"] { outline: 2px solid var(--bronze); }
 .cardstats4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); } .cardstats4 > div { padding: 14px 12px; border-inline-start: 1px solid var(--line); } .cardstats4 > div:first-child { border: 0; padding-inline-start: 0; } .cardstats4 .serif { font: 200 40px/1 var(--serif); letter-spacing: -.03em; }
 .badgegrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 12px; } .badgegrid > div { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+
+/* ===== canvas parity: library, 404, onboarding ===== */
+.searchrow { display: flex; flex-direction: column; gap: 6px; min-width: 280px; margin: 8px 0 0; max-width: 420px; margin-inline-start: auto; }
+.searchbox { display: flex; align-items: center; gap: 10px; border-bottom: 1.5px solid var(--ink); padding: 6px 0; } .searchbox input { border: 0 !important; background: transparent !important; font-size: 17px; outline: none; flex: 1; min-height: 36px; border-radius: 0 !important; padding: 0 !important; color: var(--ink); }
+.searchbox:focus-within { border-color: var(--bronze); }
+.chiprow2 { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 0; padding-bottom: 24px; border-bottom: 1px solid var(--ink); }
+.g404 { font: 200 clamp(140px, 24vw, 340px)/.85 var(--serif); letter-spacing: -.06em; animation: glitch404 3.6s steps(1) infinite; } .sw404 { animation: sweep404 3s ease-in-out infinite; }
+@keyframes glitch404 { 0%, 84%, 100% { transform: translate(0); clip-path: inset(0); } 86% { transform: translate(-14px, 3px); clip-path: inset(15% 0 55% 0); } 89% { transform: translate(16px, -3px); clip-path: inset(60% 0 5% 0); } 93% { transform: translate(-6px, 0); clip-path: inset(35% 0 35% 0); } }
+@keyframes sweep404 { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(26px); } }
+@media (prefers-reduced-motion: reduce) { .g404, .sw404 { animation: none; } }
+.onbg { position: fixed; inset: 0; z-index: 80; background: #DFD8D0; color: #202020; display: grid; place-items: center; padding: 24px; overflow: auto; }
+.onpanel { background: #F4F1EC; border: 1.5px solid #202020; border-radius: 24px; display: flex; flex-wrap: wrap; overflow: hidden; box-shadow: 0 40px 70px -40px rgba(74,64,56,.6); animation: pop .48s var(--ease); }
+.onbg .chip, .onbg .btn.alt { color: #202020; }
