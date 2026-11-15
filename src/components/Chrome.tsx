@@ -55,6 +55,12 @@ export function Chrome({ children }: { children: React.ReactNode }) {
       <div className="toastwrap" role="status" aria-live="polite">{toasts.map((t) => <div key={t.id} className="toastitem">{t.m}</div>)}</div>
       {s.profile && !s.profile.onboarded && s.ledger.length === 0 && <Onboarding />}
       <main id="main">{children}</main>
+
+      <nav className="tabbar" aria-label="Main">
+        {[["/home", "home", "M4 11l8-7 8 7v9H4z"], ["/games", "games", "M6 4l14 8-14 8z"], ["/boards", "boards", "M5 20V10M12 20V4M19 20v-7"], ["/wall", "wall", "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"], ["/card", "card", "M6 3h12v18H6zM12 9a2.5 2.5 0 1 0 .01 0M9 17c1-3 5-3 6 0"]].map(([href, k, d]) => (
+          <Link key={href} href={href} className={path === href || path.startsWith(href + "/") ? "on" : ""}><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d={d} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg><span>{tr(k, locale)}</span></Link>
+        ))}
+      </nav>
       <footer>
         <div className="wrap">
           <ul className="flinks">{FOOT.map(([h, l]) => <li key={h}><Link href={h}>{l}</Link></li>)}</ul>
