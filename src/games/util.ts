@@ -30,6 +30,7 @@ export function useTimeout() {
 }
 export function beep(freq = 440, ms = 90, vol = 0.04) {
   try {
+    if (localStorage.getItem("gripp-mute") === "1") return;
     const AC = (window.AudioContext || (window as any).webkitAudioContext) as typeof AudioContext;
     const c = new AC(); const o = c.createOscillator(); const g = c.createGain();
     o.frequency.value = freq; o.type = "sine"; g.gain.value = vol; o.connect(g); g.connect(c.destination);

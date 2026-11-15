@@ -31,7 +31,7 @@ export default function Page() {
         <div className="panel dark" role="dialog" aria-label="Mini card" style={{ position: "fixed", inset: "auto 16px 16px 16px", maxWidth: 420, margin: "0 auto", zIndex: 30 }}>
           <div className="row sp"><div className="row"><Avatar handle={sel.handle} size={56} /><div><b>@{sel.handle}</b><div className="mono" style={{ color: "var(--gold)" }}>Tier {tierFor(sel.hp).roman} {tierFor(sel.hp).name} · LV {levelFor(Math.floor(sel.hp * 1.1))} · {sel.squad}</div></div></div>
             <button className="chip" style={{ color: "#F4F1EC", borderColor: "#F4F1EC" }} onClick={() => setOpen(null)}>Close</button></div>
-          <p className="note" style={{ color: "#DFD8D0" }}>{sel.hp.toLocaleString()} Hub Points · Serial No. {String(sel.serial).padStart(4, "0")}. Sample members are placeholders, not real people.</p>
+          {sel.handle !== me && <a className="chip" style={{ color: "#F4F1EC", borderColor: "#B9986A" }} href={`/card/${sel.handle}`}>Full card</a>}<p className="note" style={{ color: "#DFD8D0" }}>{sel.hp.toLocaleString()} Hub Points · Serial No. {String(sel.serial).padStart(4, "0")}. Sample members are placeholders, not real people.</p>
         </div>)}
     </section></div>
   );

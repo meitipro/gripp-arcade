@@ -4,8 +4,14 @@ import { dailyDone, dailyFive, levelProgressOf, memberCard, streakOf, totalHp, u
 import { gameById } from "@/lib/catalog";
 import { CardView } from "./CardView";
 import { nextTier, tierFor } from "@/lib/points";
+import { useMounted } from "@/lib/useMounted";
 
 export function Home() {
+  const mounted = useMounted();
+  if (!mounted) return <section className="block" style={{ minHeight: 240 }} />;
+  return <HomeInner />;
+}
+function HomeInner() {
   const s = useStore();
   const hp = totalHp(s);
   const five = dailyFive(); const done = dailyDone(s);

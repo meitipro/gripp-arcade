@@ -1,23 +1,40 @@
 import Link from "next/link";
 import { Catalog } from "@/components/Catalog";
 import { Home } from "@/components/HomeClient";
+import { Character, CAST } from "@/components/Cast";
 
 export default function Page() {
   return (
     <div className="wrap">
-      <section className="hero">
-        <div className="label">A community proposal · November 2026</div>
-        <h1>The game hub for PrismaX.</h1>
-        <p className="lead">Twenty small games, one operator card, a cast of small robots and a community wall. Quick sessions, honest rules, no wallet, no money.</p>
-        <div className="row">
-          <Link className="btn bronze" href="/daily">Play today&apos;s Daily Five</Link>
-          <Link className="btn alt" href="/games">Browse all 20 games</Link>
+      <section className="hero contours">
+        <div className="heroGrid">
+          <div>
+            <div className="label">Season 0 · Calibration · a community proposal</div>
+            <h1>The game hub for PrismaX.</h1>
+            <p className="lead">Twenty small games, one operator card, a cast of small robots and a community wall. Quick sessions, honest rules, no wallet, no money.</p>
+            <div className="row">
+              <Link className="btn bronze" href="/daily">Play today&apos;s Daily Five</Link>
+              <Link className="btn alt" href="/games">Browse all 20 games</Link>
+            </div>
+          </div>
+          <div style={{ display: "grid", placeItems: "center" }} className="floaty" aria-hidden="true"><Character name="Gripp" size={220} /></div>
         </div>
       </section>
       <Home />
       <section className="block">
+        <div className="grid g3">
+          <div className="panel"><div className="label">01</div><h3>Pick a game</h3><p className="muted">Two minutes, one hand, any phone. Every game teaches a tiny piece of how robots work.</p></div>
+          <div className="panel"><div className="label">02</div><h3>Earn your card</h3><p className="muted">Your robot portrait, tier, four stats and badges. Screenshot it, share it, grow it.</p></div>
+          <div className="panel"><div className="label">03</div><h3>Join the squad</h3><p className="muted">Twelve regional squads, a weekly war, quests and a boss every season.</p></div>
+        </div>
+      </section>
+      <section className="block">
         <div className="row sp"><h2>Games</h2><Link href="/games" className="label">See all 20 →</Link></div>
         <Catalog limit={6} />
+      </section>
+      <section className="block">
+        <div className="row sp"><h2>Meet the cast</h2><Link href="/season" className="label">Season 0 →</Link></div>
+        <div className="row" style={{ justifyContent: "space-between" }}>{CAST.map((c) => <div key={c.name} style={{ textAlign: "center" }}><Character name={c.name} size={72} /><div className="mono">{c.name}</div></div>)}</div>
       </section>
       <section className="block">
         <div className="grid g3">

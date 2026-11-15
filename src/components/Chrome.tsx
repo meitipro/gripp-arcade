@@ -1,18 +1,23 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Gripp } from "./Logo";
 import { update, useStore } from "@/lib/store";
 import { tr } from "@/lib/i18n";
 import { hashString } from "@/lib/rng";
 
-const LINKS: [string, string][] = [["/games", "games"], ["/daily", "daily"], ["/card", "card"], ["/boards", "boards"], ["/wall", "wall"], ["/squads", "squads"], ["/quests", "quests"], ["/rules", "rules"], ["/settings", "settings"]];
+const LINKS: [string, string][] = [["/games", "games"], ["/season", "season"], ["/daily", "daily"], ["/card", "card"], ["/boards", "boards"], ["/wall", "wall"], ["/squads", "squads"], ["/quests", "quests"], ["/rules", "rules"], ["/settings", "settings"]];
 
 export function Chrome({ children }: { children: React.ReactNode }) {
   const s = useStore();
   const path = usePathname();
   const locale = s.profile?.locale ?? "en";
+  const [toasts, setToasts] = useState<{ id: number; m: string }[]>([]);
+  useEffect(() => {
+    const f = (e: Event) => { const id = Date.now() + Math.random(); setToasts((t) => [...t, { id, m: String((e as CustomEvent).detail) }]); setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 3800); };
+    window.addEventListener("gripp:toast", f); return () => window.removeEventListener("gripp:toast", f);
+  }, []);
   useEffect(() => {
     if (!s.profile) {
       const id = Math.floor(Math.random() * 9000 + 1000);
@@ -35,6 +40,7 @@ export function Chrome({ children }: { children: React.ReactNode }) {
           ))}
         </div>
       </nav>
+      <div className="toastwrap" role="status" aria-live="polite">{toasts.map((t) => <div key={t.id} className="toastitem">{t.m}</div>)}</div>
       <main id="main">{children}</main>
       <footer>
         <div className="wrap">

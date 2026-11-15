@@ -3,8 +3,14 @@ import Link from "next/link";
 import { dailyDone, dailyFive, streakOf, useStore } from "@/lib/store";
 import { gameById } from "@/lib/catalog";
 import { utcDay } from "@/lib/rng";
+import { useMounted } from "@/lib/useMounted";
 
 export default function Page() {
+  const mounted = useMounted();
+  if (!mounted) return <div className="wrap"><section className="block"><h1>Daily Five</h1></section></div>;
+  return <DailyInner />;
+}
+function DailyInner() {
   const s = useStore();
   const five = dailyFive(); const done = dailyDone(s);
   return (

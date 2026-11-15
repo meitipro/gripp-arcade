@@ -7,7 +7,7 @@ import { GAMES } from "../src/lib/catalog";
 import { dailyFive } from "../src/lib/daily";
 import { trace } from "../src/lib/optics";
 
-const empty = (): State => ({ v: 1, profile: null, ledger: [], runs: [], bests: {}, badges: [], claimed: [], tiles: 0, visits: [], shared: 0, wall: {}, wallLast: 0, fleet: { scrap: 0, lvl: [0, 0, 0, 0, 0, 0], last: 0 }, captions: [], voted: [], frozen: false, reports: [] });
+const empty = (): State => ({ v: 1, profile: null, ledger: [], runs: [], bests: {}, badges: [], claimed: [], tiles: 0, visits: [], shared: 0, wall: {}, wallLast: 0, fleet: { scrap: 0, lvl: [0, 0, 0, 0, 0, 0], last: 0 }, captions: [], voted: [], frozen: false, reports: [], bossDmg: 0 });
 
 describe("points", () => {
   it("level formula matches the plan", () => { expect(xpForLevel(10)).toBe(2128 > 2100 ? xpForLevel(10) : 2100); expect(xpForLevel(50)).toBe(Math.floor(60 * Math.pow(50, 1.55))); expect(levelFor(0)).toBe(1); expect(levelFor(xpForLevel(25))).toBe(25); });

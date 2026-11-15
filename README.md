@@ -23,6 +23,7 @@ No environment variables are required. See `.env.example` for optional ones.
 - **Operator card**: pure SVG renderer (`src/lib/card.ts`), PNG download, and a public share image at `/api/card/image`.
 - **Community**: Wall of Amplifiers with robot faces drawn from the handle, twelve squads with a top-20% war score, quests, boards, rules page with every number, staff console, settings with one-click delete.
 - **Servo** keeps its answer on the server (`/api/servo`); the browser only gets per-letter results.
+- **Season 0**: eight-week calendar, Glitch Hunt boss bar (every ranked run deals score/10 damage, 5% per-member cap), the five-character cast, public sample cards at `/card/[handle]`, toasts, sound mute, PWA manifest and OG image.
 - English and Persian (right to left) shell.
 
 ## Honest scope

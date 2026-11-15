@@ -3,6 +3,7 @@ import { useSyncExternalStore } from "react";
 import { GAMES, gameById, QUESTS } from "./catalog";
 import { applySoftCap, bandHp, CAPS, computeStreak, isPersonalBest, levelFor, statFrom, tierFor } from "./points";
 import { utcDay } from "./rng";
+import { BOSS, bossDamage } from "./season";
 import { dailyFive } from "./daily";
 
 export interface Profile {
@@ -17,11 +18,12 @@ export interface State {
   wall: Record<string, number>; wallLast: number; fleet: { scrap: number; lvl: number[]; last: number };
   captions: { scene: number; text: string; votes: number }[]; voted: string[]; frozen: boolean;
   reports: { id: string; kind: string; target: string; status: string; ts: number }[];
+  bossDmg: number;
 }
 const KEY = "gripp-arcade:v1";
 const EMPTY: State = {
   v: 1, profile: null, ledger: [], runs: [], bests: {}, badges: [], claimed: [], tiles: 0, visits: [], shared: 0,
-  wall: {}, wallLast: 0, fleet: { scrap: 0, lvl: [0, 0, 0, 0, 0, 0], last: 0 }, captions: [], voted: [], frozen: false, reports: [],
+  wall: {}, wallLast: 0, fleet: { scrap: 0, lvl: [0, 0, 0, 0, 0, 0], last: 0 }, captions: [], voted: [], frozen: false, reports: [], bossDmg: 0,
 };
 
 let state: State = EMPTY;
@@ -143,7 +145,8 @@ export function awardRun(s: State, gameId: string, score: number, ranked: boolea
   if (!held && score > (bests[g.id] ?? 0)) bests[g.id] = score;
   const run: Run = { id, game: g.id, score, hp: total, ranked, status: held ? "held" : "counted", day, ts: now };
   const runs = [run, ...s.runs].slice(0, 400);
-  let next: State = { ...s, ledger, runs, bests };
+  const dmg = !held && ranked ? Math.min(Math.floor(BOSS.hp * BOSS.memberCapPct) - (s.bossDmg ?? 0), bossDamage(score)) : 0;
+  let next: State = { ...s, ledger, runs, bests, bossDmg: (s.bossDmg ?? 0) + Math.max(0, dmg) };
   // badges
   const badges = new Set(next.badges); const before = badges.size;
   badges.add("first");

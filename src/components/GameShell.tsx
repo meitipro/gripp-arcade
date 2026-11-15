@@ -57,6 +57,13 @@ export function GameShell({ game }: { game: GameMeta }) {
     }
     let award: AwardResult | null = null;
     update((st) => { const a = awardRun(st, game.id, score, run.ranked, { held }); award = a; return a.state; });
+    const a = award as AwardResult | null;
+    if (a) {
+      const t = (m: string) => window.dispatchEvent(new CustomEvent("gripp:toast", { detail: m }));
+      if (a.hp > 0) t(`+${a.hp} HP`);
+      if (a.tierUp) t("Tier up! Check your card");
+      for (const b of a.newBadges) t(`New badge: ${b}`);
+    }
     setResult({ score, award, verdict }); setPhase("result");
   }, [run, game.id]);
 
