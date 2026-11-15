@@ -1,13 +1,13 @@
 import { robotFace } from "./members";
-import { tierFor } from "./points";
+import { TIERS, tierFor } from "./points";
 
-export interface CardData { handle: string; hp: number; level: number; squad: string; serial: number; since: string; stats: { Precision: number; Speed: number; Brain: number; Community: number }; badges: string[] }
+export interface CardData { handle: string; hp: number; level: number; squad: string; serial: number; since: string; stats: { Precision: number; Speed: number; Brain: number; Community: number }; badges: string[]; tier?: number }
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!));
 export const cleanHandle = (h: string) => h.replace(/[^\w.\-]/g, "").slice(0, 24);
 
 /** Pure function: member object in, 5:7 SVG card out. Engineer and above flip to the dark theme with gold. */
 export function cardSvg(c: CardData): string {
-  const t = tierFor(c.hp);
+  const t = c.tier ? TIERS[c.tier - 1] : tierFor(c.hp);
   const dark = t.n >= 4;
   const bg = dark ? "#202020" : "#F4F1EC", fg = dark ? "#F4F1EC" : "#202020", acc = dark ? "#B9986A" : "#B56654", soft = dark ? "#3a3a3a" : "#DFD8D0";
   const handle = esc(cleanHandle(c.handle) || "operator");
