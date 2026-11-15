@@ -7,7 +7,7 @@ import { update, useStore } from "@/lib/store";
 import { tr } from "@/lib/i18n";
 import { hashString } from "@/lib/rng";
 
-const LINKS: [string, string][] = [["/games", "games"], ["/season", "season"], ["/daily", "daily"], ["/card", "card"], ["/boards", "boards"], ["/wall", "wall"], ["/squads", "squads"], ["/quests", "quests"], ["/rules", "rules"], ["/settings", "settings"]];
+const LINKS: [string, string][] = [["/games", "games"], ["/season", "season"], ["/daily", "daily"], ["/card", "card"], ["/me", "me"], ["/boards", "boards"], ["/wall", "wall"], ["/squads", "squads"], ["/quests", "quests"], ["/discord", "discord"], ["/rules", "rules"], ["/settings", "settings"]];
 
 export function Chrome({ children }: { children: React.ReactNode }) {
   const s = useStore();

@@ -17,6 +17,12 @@ const Q: { q: string; a: string[]; c: number }[] = [
   { q: "What is path planning?", a: ["Finding a safe route to a goal", "Naming a robot", "Choosing a logo", "Recording audio"], c: 0 },
   { q: "What is a policy in robot learning?", a: ["A function from observation to action", "A legal text", "A battery rule", "A warranty"], c: 0 },
   { q: "What does a camera give a remote operator?", a: ["A view of the robot's scene", "Extra torque", "More battery", "A safer floor"], c: 0 },
+  { q: "Why use a safe stop (e-stop) on a robot?", a: ["To halt motion immediately when needed", "To save video", "To tune colors", "To change language"], c: 0 },
+  { q: "What is a depth camera good for?", a: ["Estimating distance to objects", "Cooling a motor", "Charging faster", "Compressing audio"], c: 0 },
+  { q: "What does a gripper force sensor help prevent?", a: ["Crushing fragile objects", "Slow Wi-Fi", "Dim lighting", "Typing errors"], c: 0 },
+  { q: "What is a dataset split used for?", a: ["Separating training from testing", "Making files smaller", "Painting charts", "Naming robots"], c: 0 },
+  { q: "What is a simulator for?", a: ["Testing robot ideas safely and cheaply", "Charging batteries", "Replacing every real test", "Sorting email"], c: 0 },
+  { q: "What is a sampling rate?", a: ["How often a sensor reading is taken", "How loud a motor is", "How many robots exist", "A kind of gear"], c: 0 },
   { q: "What is jitter?", a: ["Variation in delay", "A kind of gear", "A gripper finger", "A coating"], c: 0 },
 ];
 const T = 15;

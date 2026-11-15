@@ -29,3 +29,7 @@ No environment variables are required. See `.env.example` for optional ones.
 ## Honest scope
 
 This first release is **local-first**: your profile, ledger, bests and wall tiles live in your browser (`localStorage`). The sample community (placeholder handles) fills boards, the wall and squads. Shared boards switch on automatically when `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` are set. Not yet built: Discord sign in (NextAuth), Neon Postgres, multiplayer server state (duel, rally, blind operator, wall are single-player simulations here), Dot bot webhooks, and the boss event. See `DECISIONS.md`.
+
+## Discord bot
+
+Slash-command bot served by this app at /api/discord/interactions (Ed25519 verified, no SDK, no message access). Commands: /stats [member], /leaderboard, /daily, /link, /about. Members link with a 6 digit code from /link on the /discord page; after that each run syncs a clamped summary (points, level, tier, runs, streak, badges, bests, wall tiles, boss damage). Needs Upstash Redis. Setup steps are on the /discord page; register commands once with scripts/register-commands.mjs.

@@ -1,6 +1,6 @@
 export type Locale = "en" | "fa";
 const D: Record<string, { en: string; fa: string }> = {
-  season: { en: "Season", fa: "فصل" }, home: { en: "Home", fa: "خانه" }, games: { en: "Games", fa: "بازی‌ها" }, daily: { en: "Daily Five", fa: "پنج‌تایی روز" },
+  discord: { en: "Discord", fa: "دیسکورد" }, me: { en: "Progress", fa: "پیشرفت" }, season: { en: "Season", fa: "فصل" }, home: { en: "Home", fa: "خانه" }, games: { en: "Games", fa: "بازی‌ها" }, daily: { en: "Daily Five", fa: "پنج‌تایی روز" },
   card: { en: "Card", fa: "کارت" }, boards: { en: "Boards", fa: "جدول‌ها" }, wall: { en: "Wall", fa: "دیوار" },
   squads: { en: "Squads", fa: "تیم‌ها" }, quests: { en: "Quests", fa: "مأموریت‌ها" }, rules: { en: "Rules", fa: "قوانین" },
   settings: { en: "Settings", fa: "تنظیمات" }, play: { en: "Play ranked", fa: "بازی رسمی" }, practice: { en: "Practice", fa: "تمرین" },

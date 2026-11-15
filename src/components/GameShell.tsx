@@ -7,6 +7,7 @@ import { awardRun, AwardResult, rankedOn, update, useStore, getState } from "@/l
 import { bandIndex } from "@/lib/points";
 import { utcDay } from "@/lib/rng";
 import { tr } from "@/lib/i18n";
+import { syncToDiscord } from "@/lib/sync";
 
 type Phase = "intro" | "loading" | "play" | "result";
 interface Run { seed: number; token?: string; ranked: boolean }
@@ -57,6 +58,7 @@ export function GameShell({ game }: { game: GameMeta }) {
     }
     let award: AwardResult | null = null;
     update((st) => { const a = awardRun(st, game.id, score, run.ranked, { held }); award = a; return a.state; });
+    syncToDiscord();
     const a = award as AwardResult | null;
     if (a) {
       const t = (m: string) => window.dispatchEvent(new CustomEvent("gripp:toast", { detail: m }));
@@ -128,6 +130,7 @@ export function GameShell({ game }: { game: GameMeta }) {
             <button className="btn" onClick={() => start(run?.ranked ?? false)}>{tr("again", locale)}</button>
             <Link className="btn alt" href="/boards">Boards</Link>
             <Link className="btn alt" href="/card">My card</Link>
+            <button className="btn alt" onClick={() => { const t = `Gripp Arcade · ${game.name}: ${result.score.toLocaleString()} ${game.unit ?? "points"} (band ${bi + 1}/5)`; navigator.clipboard?.writeText(t).then(() => window.dispatchEvent(new CustomEvent("gripp:toast", { detail: "Result copied" }))); }}>Copy result</button>
           </div>
           <p className="note" style={{ color: "#DFD8D0" }}>{tr("hpnote", locale)}</p>
         </div>

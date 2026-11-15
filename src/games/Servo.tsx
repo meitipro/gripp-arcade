@@ -33,6 +33,8 @@ export default function Servo({ seed, mode, onReady, onProgress, onFinish }: Gam
         const score = j.won ? 1000 - 150 * (n - 1) + Math.min(100, bonus) : 0;
         onProgress?.(score);
         if (!j.won && j.answer) setMsg(`The word was ${String(j.answer).toUpperCase()}`);
+        const grid = next.map((g) => g.r.map((c) => (c === "g" ? "🟩" : c === "y" ? "🟨" : "⬛")).join("")).join(String.fromCharCode(10));
+        try { navigator.clipboard?.writeText("Gripp Arcade Servo " + (j.won ? n : "X") + "/6" + String.fromCharCode(10) + grid); } catch {}
         setTimeout(() => onFinish({ score, log: next.map((g) => g.w) }), 1400);
       }
     } catch { setMsg("Offline. Try again."); }
