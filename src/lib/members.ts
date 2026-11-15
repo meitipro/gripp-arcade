@@ -13,22 +13,24 @@ export function sampleMembers(): SampleMember[] {
   });
 }
 
-/** Robot face (SVG fragments in a 100x100 box), drawn from the handle so it never changes. */
+/** Robot face exactly as drawn in the design canvas (64 box, scaled into our 100 box). Seeded by the handle. */
 export function robotFace(handle: string): string {
-  const r = mulberry32(hashString(handle));
-  const hues = ["#B56654", "#B9986A", "#7A6B5A", "#202020", "#DFD8D0"];
-  const body = hues[Math.floor(r() * hues.length)];
-  const eye = Math.floor(r() * 3);
-  const antenna = r() > 0.5;
-  const mouth = Math.floor(r() * 3);
-  const ink = body === "#202020" ? "#F4F1EC" : "#202020";
-  let s = `<rect x="14" y="22" width="72" height="62" rx="16" fill="${body}"/>`;
-  if (antenna) s += `<rect x="48" y="8" width="4" height="16" fill="${body}"/><circle cx="50" cy="8" r="5" fill="#B9986A"/>`;
-  s += eye === 0 ? `<circle cx="36" cy="50" r="7" fill="${ink}"/><circle cx="64" cy="50" r="7" fill="${ink}"/>`
-    : eye === 1 ? `<rect x="28" y="44" width="16" height="12" rx="3" fill="${ink}"/><rect x="56" y="44" width="16" height="12" rx="3" fill="${ink}"/>`
-    : `<rect x="26" y="48" width="20" height="5" rx="2" fill="${ink}"/><rect x="54" y="48" width="20" height="5" rx="2" fill="${ink}"/>`;
-  s += mouth === 0 ? `<rect x="36" y="68" width="28" height="5" rx="2" fill="${ink}"/>`
-    : mouth === 1 ? `<path d="M34 68 Q50 80 66 68" stroke="${ink}" stroke-width="4" fill="none" stroke-linecap="round"/>`
-    : `<rect x="38" y="66" width="24" height="9" rx="3" fill="none" stroke="${ink}" stroke-width="3"/>`;
-  return s;
+  const rnd = (seed: number) => { let s = (seed >>> 0) || 1; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; };
+  let h = 7;
+  for (const c of handle) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  const r = rnd(h); r();
+  const dark = r() < 0.35;
+  const hr = 6 + Math.floor(r() * 12);
+  const ew = 6 + Math.floor(r() * 7);
+  const eh = r() < 0.5 ? ew + 2 : 3 + Math.floor(r() * 3);
+  const gap = 6 + Math.floor(r() * 8);
+  const ant = r() < 0.6;
+  const ax = 20 + Math.floor(r() * 24);
+  const acc = r() < 0.5 ? "#B56654" : "#B9986A";
+  const bg = dark ? "#202020" : "#DFD8D0", head = dark ? "#F4F1EC" : "#202020", eye = dark ? "#202020" : "#F4F1EC";
+  const ex1 = 32 - gap / 2 - ew, ex2 = 32 + gap / 2, ey = 31 - eh / 2 - 2, erx = Math.min(ew, eh) / 2;
+  return `<g transform="scale(1.5625)"><rect width="64" height="64" rx="16" fill="${bg}"/>` +
+    (ant ? `<circle cx="${ax}" cy="7" r="3" fill="${acc}"/>` : "") +
+    `<rect x="12" y="16" width="40" height="34" rx="${hr}" fill="${head}"/>` +
+    `<rect x="${ex1}" y="${ey}" width="${ew}" height="${eh}" rx="${erx}" fill="${eye}"/><rect x="${ex2}" y="${ey}" width="${ew}" height="${eh}" rx="${erx}" fill="${eye}"/></g>`;
 }

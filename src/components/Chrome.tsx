@@ -3,13 +3,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Gripp } from "./Logo";
-import { update, useStore } from "@/lib/store";
+import { totalHp, update, useStore } from "@/lib/store";
+import { Avatar } from "./Avatar";
 import { tr } from "@/lib/i18n";
 import { hashString } from "@/lib/rng";
 import dynamic from "next/dynamic";
 const Onboarding = dynamic(() => import("./Onboarding"), { ssr: false });
 
-const LINKS: [string, string][] = [["/games", "games"], ["/season", "season"], ["/daily", "daily"], ["/card", "card"], ["/me", "me"], ["/boards", "boards"], ["/wall", "wall"], ["/squads", "squads"], ["/quests", "quests"], ["/discord", "discord"], ["/rules", "rules"], ["/settings", "settings"]];
+const LINKS: [string, string][] = [["/home", "home"], ["/games", "games"], ["/boards", "boards"], ["/season", "season"], ["/wall", "wall"], ["/card", "card"]];
+const FOOT: [string, string][] = [["/daily", "Daily Five"], ["/quests", "Quests"], ["/squads", "Squads"], ["/me", "Progress"], ["/discord", "Discord bot"], ["/rules", "Rules"], ["/settings", "Settings"], ["/staff", "Staff"]];
 
 export function Chrome({ children }: { children: React.ReactNode }) {
   const s = useStore();
@@ -40,10 +42,14 @@ export function Chrome({ children }: { children: React.ReactNode }) {
       <nav className="nav" aria-label="Main">
         <div className="wrap">
           <Link href="/" className="brand"><Gripp /> <span>Gripp <i>Arcade</i></span></Link>
-          <button className="themebtn" onClick={toggleTheme} aria-label={`Switch theme (current: ${theme || "auto"})`} title="Light / dark"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" strokeWidth="1.6" /><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor" /></svg></button>
-          {LINKS.map(([href, k]) => (
-            <Link key={href} href={href} className={path === href || path.startsWith(href + "/") ? "on" : ""}>{tr(k, locale)}</Link>
-          ))}
+          <div className="navlinks">
+            {LINKS.map(([href, k]) => (
+              <Link key={href} href={href} className={path === href || (href !== "/home" && path.startsWith(href + "/")) ? "on" : ""}>{tr(k, locale)}</Link>
+            ))}
+          </div>
+          <Link href="/me" className="hp" aria-label="Hub Points"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0 L12 6 L6 12 L0 6Z" fill="#B56654" /></svg>{totalHp(s).toLocaleString()} HP</Link>
+          <Link href="/card" className="avatarlink" aria-label="My card"><Avatar handle={s.profile?.handle ?? "operator"} size={40} /></Link>
+          <button className="themebtn" onClick={toggleTheme} aria-label={`Switch between light and dark theme (current: ${theme || "auto"})`} title="Light / dark"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.8" /><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" /></svg></button>
         </div>
       </nav>
       <div className="toastwrap" role="status" aria-live="polite">{toasts.map((t) => <div key={t.id} className="toastitem">{t.m}</div>)}</div>
@@ -51,6 +57,7 @@ export function Chrome({ children }: { children: React.ReactNode }) {
       <main id="main">{children}</main>
       <footer>
         <div className="wrap">
+          <ul className="flinks">{FOOT.map(([h, l]) => <li key={h}><Link href={h}>{l}</Link></li>)}</ul>
           <p>{tr("unofficial", locale)} {tr("hpnote", locale)}</p>
           <p className="mono">Gripp Arcade · Season 0 · Calibration</p>
         </div>

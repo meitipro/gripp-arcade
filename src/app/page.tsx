@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Home } from "@/components/HomeClient";
 import { Character, CAST } from "@/components/Cast";
 import { HeroGripp } from "@/components/HeroGripp";
 import { Arena, BossPanel, CardTeaser, Loops, OneRule, Ticker, WallTeaser } from "@/components/Landing";
@@ -26,7 +25,6 @@ export default function Page() {
         </div>
       </section>
       <Ticker />
-      <div className="wrap"><Home /></div>
       <Loops />
       <Arena />
       <BossPanel />
